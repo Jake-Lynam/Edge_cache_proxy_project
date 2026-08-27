@@ -7,6 +7,11 @@ import (
 )
 
 func main() {
+	http.HandleFunc("/", handler)
+	http.ListenAndServe(":9090", nil)
+}
+
+func handler(w http.ResponseWriter, r *http.Request) {
 	resp, err := http.Get("http://localhost:8080") //makes request to server and gets resp/error
 	if err != nil {
 		fmt.Println("error making request:", err)
@@ -19,6 +24,6 @@ func main() {
 		fmt.Println("error reading body:", err)
 		return
 	}
-
-	fmt.Println("got response:", string(body))
+	
+	w.Write(body)
 }
