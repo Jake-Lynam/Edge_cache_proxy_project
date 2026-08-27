@@ -24,6 +24,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("error reading body:", err)
 		return
 	}
-	
+
 	w.Write(body)
 }
