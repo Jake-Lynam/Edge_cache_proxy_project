@@ -15,3 +15,11 @@ I've learned the http concepts of go such as goroutine which allows for quicker 
 between a proxy and client/server by snycing multiple functions together within the proxy to run
 at the same time using avaliable CPU cores. I will potentially learn more about this concept later
 down the line.
+
+06/09/2026
+Today I have implemented my finished cache into this project. For now the system is ready to save 
+different requests and responses but first I need to implement these different items into client
+and server. 
+
+What's left? I need to implement the different request and response types, include mutexing 
+for concurrency, create ttl within the cache, write tests and gather metrics for a benchmark

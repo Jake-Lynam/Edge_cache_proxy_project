@@ -7,11 +7,19 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", handler)
+	cache := NewLRU(5)
+
+	http.HandleFunc("/", cache.handler)
 	http.ListenAndServe(":9090", nil)
 }
 
-func handler(w http.ResponseWriter, r *http.Request) {
+func (c *LRU_Cache) handler(w http.ResponseWriter, r *http.Request) {
+	u := c.Get(r.URL.Path)
+	if u != "" {
+		w.Write([]byte(u))
+		return
+	}
+
 	resp, err := http.Get("http://localhost:8080") //makes request to server and gets resp/error
 	if err != nil {
 		fmt.Println("error making request:", err)
@@ -25,5 +33,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Write(body)
+	c.Set(r.URL.Path, string(body))
+	w.Write(body) //sends the body to the client in form of bytes attached to the body of the packet
 }
