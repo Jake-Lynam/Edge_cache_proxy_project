@@ -22,4 +22,3 @@ strategies and concurrency handling
 - Benchmark results
 
 ## Running locally
-(fill in once there's something runnable end-to-end)
