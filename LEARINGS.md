@@ -15,3 +15,8 @@ I've learned the http concepts of go such as goroutine which allows for quicker 
 between a proxy and client/server by snycing multiple functions together within the proxy to run
 at the same time using avaliable CPU cores. I will potentially learn more about this concept later
 down the line.
+
+27/08/2026
+Finished the proxy and created a client to simulate the proper function of the proxy, I've learned that the "Write" command 
+is used to send the response back to a user. It relates to the http.ResponseWriter interface which is essentially the tool used
+to send a machines request its response. 
