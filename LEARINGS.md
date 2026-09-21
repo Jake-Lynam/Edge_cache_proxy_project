@@ -16,6 +16,11 @@ between a proxy and client/server by snycing multiple functions together within 
 at the same time using avaliable CPU cores. I will potentially learn more about this concept later
 down the line.
 
+27/08/2026
+Finished the proxy and created a client to simulate the proper function of the proxy, I've learned that the "Write" command 
+is used to send the response back to a user. It relates to the http.ResponseWriter interface which is essentially the tool used
+to send a machines request its response. 
+
 06/09/2026
 Today I have implemented my finished cache into this project. For now the system is ready to save 
 different requests and responses but first I need to implement these different items into client
