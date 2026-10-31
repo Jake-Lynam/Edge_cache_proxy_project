@@ -1,6 +1,9 @@
 package main
 
-import "container/list"
+import (
+	"container/list"
+	"sync"
+)
 
 type Cache interface {
 	Get(key string) string
@@ -8,6 +11,7 @@ type Cache interface {
 }
 
 type LRU_Cache struct {
+	mu  sync.Mutex //Mutex for each instance of a cache
 	m   map[string]*cacheMapElement
 	cap int
 	L   *list.List
@@ -18,8 +22,8 @@ type cacheMapElement struct { // map structure created to store a pointer and th
 	value string
 }
 
-func NewLRU(cap int) LRU_Cache {
-	return LRU_Cache{
+func NewLRU(cap int) *LRU_Cache {
+	return &LRU_Cache{
 		m:   map[string]*cacheMapElement{}, // map that stores the structures blueprint
 		cap: cap,                           // capacity of cache
 		L:   list.New(),
@@ -27,6 +31,9 @@ func NewLRU(cap int) LRU_Cache {
 }
 
 func (c *LRU_Cache) Get(key string) string {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
 	v, ok := c.m[key] // retrieving the value from cache map
 
 	if !ok { // fail-safe if the value doesn't exist
@@ -38,6 +45,9 @@ func (c *LRU_Cache) Get(key string) string {
 }
 
 func (c *LRU_Cache) Set(key, value string) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
 	v, ok := c.m[key] // attempts to retrieve value from map, checks if already exists
 
 	if !ok { // if doesn't exist

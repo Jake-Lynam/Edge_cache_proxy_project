@@ -44,15 +44,15 @@ Currently hardcoded in source rather than configurable via flags:
 
 1. Start the mock backend server:
 ```bash
-   go run server/main.go
+   go run ./origin
 ```
 2. In a separate terminal, start the proxy:
 ```bash
-   go run proxy/main.go
+   go run ./proxy
 ```
 3. In a third terminal, run the client:
 ```bash
-   go run client/main.go
+   go run ./client
 ```
 
 The first request will take ~5 seconds (hitting the backend directly). Run the client again for the same path and it should return near-instantly, served from the LRU cache.

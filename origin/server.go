@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"time"
 )
@@ -13,6 +14,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/", handler)
-	http.ListenAndServe(":8080", nil)
-
+	log.Println("server listening on :8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }

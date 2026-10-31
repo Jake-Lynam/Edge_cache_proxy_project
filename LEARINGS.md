@@ -28,3 +28,6 @@ and server.
 
 What's left? I need to implement the different request and response types, include mutexing 
 for concurrency, create ttl within the cache, write tests and gather metrics for a benchmark
+
+31/10/2026
+I've introduced mutexing onto my get and set functions within the cache file. This allows the cache to be strictly used one at a time to prevent error. Also i've started implementing proper path calls on my proxy. Before it would accept a call from client but would use the standard root path for the server, this was for testing. Now the code saves the root and combines it with the clients enetered path, this allows for proper lookup, also i've used requesturi() as it includes path string, this prevents accidental cloning i.e path is /search for two different calls but its path string includes what to search for (dog,cat,etc) I've also included a proper 502 error response.
